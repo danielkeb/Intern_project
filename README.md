@@ -63,7 +63,8 @@ Visit http://localhost:8000 to access the GETPCMS application.
 
 
 ## Hello Every One
-##### I'm excited to share a project that I developed during my internship – Get Pc Managment System. It's now available on my GitHub repository, and I invite you to explore its features and functionalities.
+#### If you're looking for a ready-to-roll solution, Get pc Management system is the answer. Interested parties, contact me for details and negotiations.
 
+#### Own it now and take the next step in your tech journey!
 
-##### Feel free to check it out, provide feedback, or even contribute if you find it interesting. If anyone is interested in discussing the potential sale or collaboration on this project, please don't hesitate to reach out to me.
+#### Contact: +251921154404
