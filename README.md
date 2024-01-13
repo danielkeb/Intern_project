@@ -5,7 +5,7 @@
 
 ### Key Features:
 
-- Barcode and QR Code Generation:
+- Barcode and QR Code Generation: When pc registred automatically generate QR codes barcode .
 
 The system includes functionalities for generating unique barcodes and QR codes for registered PCs. This enhances the efficiency of PC identification and management.
 User Roles:
@@ -15,13 +15,15 @@ User Roles:
 - Admin: Admin users have the authority to register security personnel, manage user permissions, and oversee the overall system operation.
 - Granted Security: Granted Security users are responsible for managing PC Owners and handling incident reporting within the computer labs.
 - PC Owners: PC Owners utilize Laravel forms for registration and updates related to their personal computers.
+
 # Admin Dashboard
 ![Alt Text](https://github.com/danielkeb/Intern_project/raw/main/public/images/admindashboard.png)
 
-### Exit Gate Scanning:
+### At Exit Gate Scanning:
 
 A key feature of the system is the implementation of exit gate scanning. When students exit the university, they are required to scan their PC's barcode for verification.
 How to Use:
+## Scanning pc owners barcode or qrcode
 ![Alt Text](https://github.com/danielkeb/Intern_project/raw/main/public/images/waitingtoscan.png)
 
 
@@ -49,8 +51,19 @@ Copy code
 -Run the Application:
 php artisan serve
 Visit http://localhost:8000 to access the GETPCMS application.
-# Login Page
+
+
+
+# More page images:
+## Login Page
 ![Alt Text](https://github.com/danielkeb/Intern_project/raw/main/public/images/logingtpcms.png)
 
-# Task management page
+## Task management page
 ![Alt Text](https://github.com/danielkeb/Intern_project/raw/main/public/images/taskpage.png)
+
+
+## Hello Every One
+##### I'm excited to share a project that I developed during my internship – Get Pc Managment System. It's now available on my GitHub repository, and I invite you to explore its features and functionalities.
+
+
+##### Feel free to check it out, provide feedback, or even contribute if you find it interesting. If anyone is interested in discussing the potential sale or collaboration on this project, please don't hesitate to reach out to me.

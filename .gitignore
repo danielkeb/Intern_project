@@ -17,3 +17,9 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
+# Premium version files
+premium_version
+premium_version.log
+/routes
+/app/Http
+
