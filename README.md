@@ -11,9 +11,12 @@ The system includes functionalities for generating unique barcodes and QR codes 
 User Roles:
 # Download qrcode and barcode page
 ![Alt Text](https://github.com/danielkeb/Intern_project/raw/main/public/images/downloadqrcode.png)
+
 - Admin: Admin users have the authority to register security personnel, manage user permissions, and oversee the overall system operation.
 - Granted Security: Granted Security users are responsible for managing PC Owners and handling incident reporting within the computer labs.
 - PC Owners: PC Owners utilize Laravel forms for registration and updates related to their personal computers.
+# Admin Dashboard
+![Alt Text](https://github.com/danielkeb/Intern_project/raw/main/public/images/admindashboard.png)
 
 ### Exit Gate Scanning:
 
@@ -44,10 +47,6 @@ Copy code
 - php artisan db:seed
    - email: Admin1234@gmail.com password : 12345678
 -Run the Application:
-# Admin Dashboard
-![Alt Text](https://github.com/danielkeb/Intern_project/raw/main/public/images/admindashboard.png)
-
-Copy code
 php artisan serve
 Visit http://localhost:8000 to access the GETPCMS application.
 # Login Page
