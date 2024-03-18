@@ -51,7 +51,6 @@
     <div style="height:200px;"></div>
     <div class="contain">
         
-
         <div id="detail" >
             
             <div>
@@ -83,6 +82,7 @@
     <br>
     <hr>
     @include('home.footer')
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

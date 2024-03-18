@@ -79,7 +79,8 @@
                         <td>{{ $user->address }}</td>
                         <td>{{ $user->email }}</td>
                         
-                          <td><a href="{{ url('/permission/'. $user['id']) }}"><i class="fas fa-key"></i><span>Grant Permission</span></a></td>              
+                          <td><a href="{{ url('/permission/update/'. $user->id) }}"><i class="fas fa-key"></i><span>Permission</span></a></td>   
+                          <!-- <td><a href="{{ url('/permission/delete/'. $user->id) }}"><i class="fas fa-key"></i><span>Delete</span></a></td>              -->
                         
                     </tr>
                     @endforeach

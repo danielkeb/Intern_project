@@ -38,43 +38,47 @@ class adminController extends Controller
          
              if ($authenticatedUser->usertype !== 1) {
                  // Throw an exception or handle the unauthorized registration attempt
+                 //return new View($request,'',{'authenticated}
+             }
+             
+                $input = $request->validate([
+                    'userid' => ['required', 'string', 'max:255', 'unique:users'],
+                    'name' => ['required', 'string', 'max:255'],
+                    'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                    'phone' => [
+                        'required',
+                        'string',
+                        // new EthiopianPhoneNumber,
+                        // Add more validation rules if needed
+                    ],
+                    'address' => 'required',
+                    'password' => $this->passwordRules(),
+                    'password_confirmation' => 'required|same:password', // Add password confirmation rule
+                   // 'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
+                ], [
+                   'userid.unique'=>'user id has already been taken.',
+                    'email.unique'=>'Email has already been taken.',
+                    'password_confirmation.same' => 'The password confirmation does not match the password.',
+                ]);
+            
+                $user = User::create([
+                    'userid' => $input['userid'],
+                    'name' => $input['name'],
+                    'email' => $input['email'],
+                    'phone' => $request->input('phone'),
+                    'address' => $request->input('address'),
+                    'password' => Hash::make($input['password']),
+                    'registered_by' => $authenticatedUser->id, // Set the registered_by foreign key
+                ]);
+            
+                // Redirect to the dashboard page with a success message
+                $users = User::all();
+                $userType = User::where('usertype', 2)->value('usertype'); // Default user type value
+                return view('admin.permission', compact('users', 'userType'));
              }
          
-             $input = $request->validate([
-                 'userid' => ['required', 'string', 'max:255', 'unique:users'],
-                 'name' => ['required', 'string', 'max:255'],
-                 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-                 'phone' => [
-                     'required',
-                     'string',
-                     // new EthiopianPhoneNumber,
-                     // Add more validation rules if needed
-                 ],
-                 'address' => 'required',
-                 'password' => $this->passwordRules(),
-                 'password_confirmation' => 'required|same:password', // Add password confirmation rule
-                 'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
-             ], [
-                'userid.unique'=>'user id has already been taken.',
-                 'email.unique'=>'Email has already been taken.',
-                 'password_confirmation.same' => 'The password confirmation does not match the password.',
-             ]);
+             
          
-             $user = User::create([
-                 'userid' => $input['userid'],
-                 'name' => $input['name'],
-                 'email' => $input['email'],
-                 'phone' => $request->input('phone'),
-                 'address' => $request->input('address'),
-                 'password' => Hash::make($input['password']),
-                 'registered_by' => $authenticatedUser->id, // Set the registered_by foreign key
-             ]);
-         
-             // Redirect to the dashboard page with a success message
-             $users = User::all();
-             $userType = User::where('usertype', 2)->value('usertype'); // Default user type value
-             return view('admin.permission', compact('users', 'userType'));
-         }
          
 
             public function searchUser(Request $request)
@@ -192,6 +196,23 @@ class adminController extends Controller
         $user=User::where('usertype','0')->get();
         return view('admin.granted',compact('user'));
     }
+
+    public function permission_update($id){
+        $user=User::find($id);
+        return view('admin.permission_update',['user' => $user]);
+    }
+
+    public function permission_delete($id){
+        $user=User::find($id);
+        if($user){
+            $user->delete();
+            return view('admin.permission_update',['user' => $user]);
+        }
+        else{
+            return back()->with('error','user not found');
+        }
+    }
+        
 
     public function student()
     {

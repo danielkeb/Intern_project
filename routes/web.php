@@ -154,7 +154,7 @@ Route::post('searchedSecurity',[adminController::class,'searchSecurity'])->name(
 Route::post('/task',[adminController::class,'task'])->name('admin.task');
 Route::post('/security', [adminController::class, 'security'])->name('security');
 Route::post('/component', [adminController::class, 'component'])->name('component');
-Route::post('permission}', [adminController::class, 'permission'])->name('admin.permisson');
+Route::post('permission', [adminController::class, 'permission'])->name('admin.permisson');
 Route::get('/admin/update', [adminController::class, 'update'])->name('admin.update');
 
 Route::get('/ungrantedUsers',[adminController::class,'ungranted'] )->name('admin.ungranted');
@@ -177,6 +177,13 @@ Route::post('/admin/searchUser', [adminController::class, 'searchUser'])->name('
 
 
 Route::get('/check-email/{email}', 'adminController@checkEmail')->name('check-email');
+
+
+Route::get('/permission/update/{id}', [adminController::class, 'permission_update'])->name('admin.permisson_update');
+Route::post('/permission/update/{id}', [adminController::class, 'permission_update'])->name('admin.permisson_update');
+Route::get('/permission/delete/{id}', [adminController::class, 'permission_delete'])->name('admin.permisson_delete');
+Route::post('/permission/delete/{id}', [adminController::class, 'permission_delete'])->name('admin.permisson_delete');
+
 
 
 });

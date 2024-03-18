@@ -80,7 +80,7 @@
                         <td>{{ $user->address }}</td>
                         <td>{{ $user->email }}</td>
                         
-                        <td><a href="{{ url('permission') }}"><i class="fas fa-key"></i><span>Revoke Permission</span></a></td>       
+                        <td><a href="{{ url('permission/update/'.$user->id) }}"><i class="fas fa-key"></i><span>Revoke Permission</span></a></td>       
                         
                     </tr>
                     @endforeach

@@ -13,7 +13,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            height: 64px;
+            height: 45px;
         }
 
         .logo {

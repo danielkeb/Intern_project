@@ -11,9 +11,11 @@
     <style>
         body {
             text-align: center;
+            margin-top: 20px;
         }
-        .down{
-            text-align:center;
+
+        .down {
+            text-align: center;
         }
 
         .container {
@@ -27,10 +29,12 @@
         }
 
         .form-inline {
-            display: flex;
             justify-content: center;
         }
-
+        .form-inline .input-group input {
+            display: inline;
+            margin-right:10px ;
+        }
         .input-group {
             margin-right: 10px;
         }
@@ -47,36 +51,57 @@
             margin-bottom: 10px;
         }
 
+        ul {
+            align-items: center;
+        }
+
         img {
-            max-width: 200px;
+            max-width: 100%;
             height: auto;
         }
+        @media screen and (max-width: 576px) {
+        /* Adjust input width */
+        .form-inline .input-group input {
+            display: inline;
+            margin-right:10px ;
+        }
+    
+        /* Adjust button width and font size */
+        .form-inline button {
+            width: auto;
+            font-size: 12px;
+        }
+    }
     </style>
 </head>
 
 <body>
     @include('home.navbar')
-    <div style="height: 150px;"></div>
-    <div class="down">
-        <h1>Download Barcode & Qrcode</h1>
+    <div class="container">
+        <div class="down">
+            <h1>Download Barcode & Qrcode</h1>
 
-        <form action="{{ route('pcregisters.searchBarcode') }}" method="post" class="form-inline">
-            @csrf
-            <div class="input-group">
-                <input id="user_id" type="text" class="form-control @error('user_id') is-invalid @enderror"
-                    name="user_id" value="{{ old('user_id') }}" required autofocus placeholder="Search by user id">
-                @error('user_id')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-                @enderror
-            </div>
-            <button type="submit" class="btn btn-primary">
-                search
+            <form action="{{ route('pcregisters.searchBarcode') }}" method="post" class="form-inline">
+    @csrf
+    <div class="input-group">
+        <input id="user_id" type="text" class="form-control form-control-sm @error('user_id') is-invalid @enderror"
+            name="user_id" value="{{ old('user_id') }}" required autofocus placeholder="Search by user id">
+        @error('user_id')
+        <span class="invalid-feedback" role="alert">
+            <strong>{{ $message }}</strong>
+        </span>
+        @enderror
+        <div class="input-group-append">
+            <button type="submit" class="btn btn-primary btn-sm">
+                Search
             </button>
-        </form>
-        <br><br>
-        @foreach($pcregisters as $pcregister)
+        </div>
+    </div>
+</form>
+<br><br>
+
+          
+@foreach($pcregisters as $pcregister)
         <a href="{{ route('downloadQRCode', ['username' => $pcregister->username]) }}" download>
             {{ $pcregister->username }}:
             <img src="{{ asset('qrcode/'.$pcregister->username.'.png') }}" alt="QR Code">
@@ -86,12 +111,17 @@
         </a>
         <br><br>
         @endforeach
+        </div>
     </div>
 
-    <div style="height: 200px;"></div>
-    <br>
     <hr>
     @include('home.footer')
+
+    <!-- Bootstrap scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
 </body>
 
 </html>
