@@ -69,7 +69,7 @@
 <body>
     @include('home.navbar')
 
-    <div style="height: 150px;"></div>
+    <!-- <div style="height: 150px;"></div> -->
     <h1>Update PC Register</h1>
     @include('sweetalert::alert')
 

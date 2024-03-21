@@ -57,22 +57,31 @@
             .nav-toggle-btn {
                 display: block;
             }
+            .navbar-collapse.show {
+                position: fixed;
+                top: 60px; /* Adjust based on navbar height */
+                width: 100%;
+                background-color: #fff;
+                z-index: 1000;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+
+          
         }
     </style>
 </head>
 
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="#">
                 <img src="{{ asset('images/getpcms.png') }}" alt="Logo" class="logo-img" style="border-radius: 60px;">
             </a>
-            <button class="navbar-toggler nav-toggle-btn" type="button" data-toggle="collapse" data-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler nav-toggle-btn" type="button" onclick="toggleNavigation()">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-            <ul class="navbar-nav align-items-center">
+                <ul class="navbar-nav align-items-center">
                     <li class="nav-item">
                         <a href="{{ url('/scanBarcode') }}" class="nav-link">HOME</a>
                     </li>
@@ -127,6 +136,7 @@
                 </ul>
             </div>
         </nav>
+        <div class="nav-overlay" onclick="toggleNavigation()"></div>
     </header>
 
     <!-- Your content goes here -->
@@ -136,16 +146,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js"></script>
 
-    <!-- Your custom scripts -->
-    <!-- Script for toggling navigation -->
-    <!-- <script>
+    <script>
         // Function to toggle navigation menu and overlay
         function toggleNavigation() {
             var navbarNav = document.getElementById("navbarNav");
-            var navOverlay = document.querySelector(".nav-overlay");
+            var body = document.body;
             navbarNav.classList.toggle("show");
-            navOverlay.classList.toggle("show-overlay");
+            body.classList.toggle("nav-open"); // Toggle body class for padding
         }
-        
-    </script> -->
+    </script>
 </body>

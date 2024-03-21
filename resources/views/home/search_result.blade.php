@@ -48,7 +48,7 @@
 
 <body>
     @include('home.navbar')
-    <div style="height:200px;"></div>
+    <!-- <div style="height:200px;"></div> -->
     <div class="contain">
         
         <div id="detail" >

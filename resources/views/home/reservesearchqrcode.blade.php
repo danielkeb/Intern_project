@@ -65,7 +65,7 @@
     @include('home.navbar')
     <div class="container">
         <!-- Header -->
-        <div style="height:150px;"></div>
+        <div style=""></div>
         <!-- this function of JavaScript plays Camera -->
         <div class="container-fluid header_se">
             <div class="col-md-8">
@@ -194,7 +194,7 @@
         }
     </style>
     @yield('scripts')
-    <div style="height:250px;"></div>
+    <div style="height:100px;"></div>
     @include('home.footer')
 </body>
 </html>

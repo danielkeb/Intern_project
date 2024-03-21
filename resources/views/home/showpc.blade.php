@@ -61,7 +61,9 @@
             text-align: left;
             border-bottom: 1px solid #ccc;
         }
-
+        #srch{
+            margin-right:15px;
+        }
         .home {
             text-align: center;
             margin-bottom: 30px;
@@ -70,6 +72,10 @@
         .content {
             overflow-x: auto;
         }
+.input-group {
+        justify-self: end;
+}
+
 
         @media (max-width: 767px) {
             table {
@@ -82,29 +88,32 @@
 
 <body>
     @include('home.navbar')
-    <div style="height:150px;"></div>
+    <!-- <div style="height:150px;"></div> -->
     <div class="container">
-    <section class="home">
+    <!-- <section class="home">
     <h1 style="color: #4287f5; font-size: 32px; text-align: center; text-transform: uppercase; letter-spacing: 2px;">Users Detail!!</h1>
-</section>
-        @include('sweetalert::alert')
-        <section class="content">
-            <form action="{{ route('pcregisters.searchUpdate') }}" method="post" class="form-inline">
-                @csrf
-                <div class="input-group">
-                <input id="user_id" type="text" class="form-control @error('user_id') is-invalid @enderror"
-                    name="user_id" value="{{ old('user_id') }}" required autofocus placeholder="Search by user id">
-                @error('user_id')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-                @enderror
-                <button type="submit" class="btn btn-primary ml-2">
-                    <i class="fas fa-search"></i>
-                </button>
-               </div>
+</section> -->
+  @include('sweetalert::alert')
+    <section class="content">
+    <form action="{{ route('pcregisters.searchUpdate') }}" method="post" class=" ml-auto mr-auto">
+    @csrf
+    <div class="input-group">
+    <input id="srch" type="text" class="form-control @error('user_id') is-invalid @enderror"
+    name="user_id" value="{{ old('user_id') }}" required autofocus placeholder="Search by user id">
 
-            </form>
+        @error('user_id')
+        <span class="invalid-feedback" role="alert">
+            <strong>{{ $message }}</strong>
+        </span>
+        @enderror
+        <div class="input-group-append">
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+    </div>
+</form>
+
             <table>
                 <thead>
                     <tr>

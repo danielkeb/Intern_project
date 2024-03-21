@@ -67,7 +67,7 @@
     <!-- header start -->
     @include('home.navbar')
     <!-- header end -->
-    <div style="height:150px;"></div>
+    <!-- <div style="height:150px;"></div> -->
     <div class="cont">
         @include('sweetalert::alert')
         <h1 style="color:blue;">Register</h1>

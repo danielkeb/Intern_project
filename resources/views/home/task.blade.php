@@ -82,7 +82,7 @@
 
 <body>
     @include('home.navbar')
-    <div style="height:150px;"></div>
+    <!-- <div style="height:150px;"></div> -->
     <div class="container">
     <section class="home">
     <h1 style="color: #4287f5; font-size: 32px; text-align: center; text-transform: uppercase; letter-spacing: 2px;">User Found!!</h1>
@@ -137,11 +137,11 @@
 
                         <td>
                             <a href="{{ url('edit/' . $user['id']) }}"
-                                class="btn btn-primary edit-button">Edit</a>
+                                class="btn btn-primary edit-button"><i class="fas fa-edit"></i></a>
                         </td>
                         <td>
                             <a onClick="confirmation(event)" href="{{ url('delete/' . $user['id']) }}"
-                                class="btn btn-danger delete-button">Delete</a>
+                                class="btn btn-danger delete-button"><i class="fas fa-trash-alt"></i></a>
                         </td>
                       
                     </tr>

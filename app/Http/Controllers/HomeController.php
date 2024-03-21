@@ -35,7 +35,7 @@ class HomeController extends Controller
             
                 
             } else if ($user->usertype == 0) {
-                return view('home.scanQrcode');
+                return view('home.reservesearchqrcode');
             }
         }
     
