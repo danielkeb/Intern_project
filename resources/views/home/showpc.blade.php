@@ -61,9 +61,24 @@
             text-align: left;
             border-bottom: 1px solid #ccc;
         }
-        #srch{
-            margin-right:15px;
+
+        .input-group {
+            margin-bottom: 15px;
         }
+
+        .input-group input,
+        .input-group select {
+            max-width: 250px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group select {
+            max-width: 250px;
+        }
+
         .home {
             text-align: center;
             margin-bottom: 30px;
@@ -72,10 +87,28 @@
         .content {
             overflow-x: auto;
         }
-.input-group {
-        justify-self: end;
+        .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
+.input-flex-container {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.input-group,
+.form-group {
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.input-group input,
+.form-group select {
+    max-width: 200px;
+}
 
         @media (max-width: 767px) {
             table {
@@ -88,33 +121,67 @@
 
 <body>
     @include('home.navbar')
-    <!-- <div style="height:150px;"></div> -->
     <div class="container">
-    <!-- <section class="home">
-    <h1 style="color: #4287f5; font-size: 32px; text-align: center; text-transform: uppercase; letter-spacing: 2px;">Users Detail!!</h1>
-</section> -->
-  @include('sweetalert::alert')
-    <section class="content">
-    <form action="{{ route('pcregisters.searchUpdate') }}" method="post" class=" ml-auto mr-auto">
-    @csrf
-    <div class="input-group">
-    <input id="srch" type="text" class="form-control @error('user_id') is-invalid @enderror"
-    name="user_id" value="{{ old('user_id') }}" required autofocus placeholder="Search by user id">
+        @include('sweetalert::alert')
+        <section class="content">
+        <div class="input-flex-container">
+    <form action="{{ route('pcregisters.searchUpdate') }}" method="post" class="ml-auto mr-auto">
+        @csrf
+        <div class="input-group">
+            <input id="srch" type="text" class="form-control mr-2 @error('user_id') is-invalid @enderror"
+                name="user_id" value="{{ old('user_id') }}" required autofocus placeholder="Search by user id">
+            @error('user_id')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+            @enderror
+            <div class="input-group-append">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-search mr-1"></i> <!-- Added margin class -->
+                </button>
+            </div>
+        </div>
+    </form>
 
-        @error('user_id')
-        <span class="invalid-feedback" role="alert">
-            <strong>{{ $message }}</strong>
-        </span>
-        @enderror
-        <div class="input-group-append">
-            <button type="submit" class="btn btn-primary">
-                <i class="fas fa-search"></i>
+    <form action="{{ route('setRowsPerPage') }}" method="post">
+        @csrf
+        <div class="form-group">
+            <label for="rowsPerPage" class="mr-2">Rows</label>
+            <select name="rowsPerPage" id="rowsPerPage" class="form-control">
+                <option value="5" {{ $rowsPerPage == 5 ? 'selected' : '' }}>5</option>
+                <option value="10" {{ $rowsPerPage == 10 ? 'selected' : '' }}>10</option>
+                <option value="20" {{ $rowsPerPage == 20 ? 'selected' : '' }}>20</option>
+                <!-- Add more options as needed -->
+            </select>
+            <br>
+            <button type="submit" class="btn btn-primary ml-2">
+                <i class="fas fa-check mr-1"></i> <!-- Added margin class -->
+                Apply
             </button>
         </div>
-    </div>
-</form>
+    </form>
 
-            <table>
+    <form action="{{ route('pcregisters.filterByDescription') }}" method="post">
+        @csrf
+        <div class="form-group">
+            <label for="descriptionFilter" class="mr-2">Filter by Description:</label>
+            <select name="descriptionFilter" id="descriptionFilter" class="form-control">
+                <option value="">All</option>
+                <option value="guest">Guest</option>
+                <option value="student">Student</option>
+                <option value="staff">Staff</option>
+            </select>
+            <br>
+            <button type="submit" class="btn btn-primary ml-2">
+                <i class="fas fa-filter mr-1"></i> <!-- Added margin class -->
+                Filter
+            </button>
+        </div>
+    </form>
+</div>
+
+
+            <table class="table table-striped">
                 <thead>
                     <tr>
                         <th>User ID</th>
@@ -125,7 +192,6 @@
                         <th>Photo</th>
                         <th>EDIT</th>
                         <th>DELETE</th>
-                       
                     </tr>
                 </thead>
                 <tbody>
@@ -137,25 +203,23 @@
                         <td>{{ $pcregister->pc_name }}</td>
                         <td>{{ $pcregister->serial_number }}</td>
                         <td>
-                        @if(isset($pcregister->photo) && $pcregister->photo)
+                            @if(isset($pcregister->photo) && $pcregister->photo)
                             <img src="{{ asset( $pcregister->photo) }}" alt="Photo" style="width: 150px; height: 120px;">
-                        @else
+                            @else
                             No photo available
-                        @endif
+                            @endif
                         </td>
-
                         <td>
                             <a href="{{ url('edit/' . $pcregister['id']) }}" class="btn btn-primary edit-button">
                                 <i class="fas fa-edit"></i> <!-- Edit Icon -->
                             </a>
                         </td>
                         <td>
-                            <a onClick="confirmation(event)" href="{{ url('delete/' . $pcregister['id']) }}" class="btn btn-danger delete-button">
+                            <a onClick="confirmation(event)" href="{{ url('delete/' . $pcregister['id']) }}"
+                                class="btn btn-danger delete-button">
                                 <i class="fas fa-trash-alt"></i> <!-- Delete Icon -->
                             </a>
                         </td>
-
-                      
                     </tr>
                     @endforeach
                 </tbody>
@@ -212,3 +276,4 @@
 </body>
 
 </html>
+

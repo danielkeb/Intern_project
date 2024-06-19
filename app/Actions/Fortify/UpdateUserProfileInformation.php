@@ -22,15 +22,22 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
             'phone' => ['required', 'string', 'max:255'],
             'address' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
-            'photo' => ['nullable', 'mimes:jpg,jpeg,png', 'max:1024'],
+            'photo' => ['nullable', 'image', 'mimes:jpg,jpeg,png', 'max:1024'],
         ])->validateWithBag('updateProfileInformation');
-
-        if (isset($input['photo'])) {
-            $user->updateProfilePhoto($input['photo']);
+    
+        // Handle the profile photo upload
+        if (isset($input['photo']) && $input['photo']->isValid()) {
+            // Delete the old photo if exists
+            if ($user->profile_photo_path) {
+                \Storage::disk('public')->delete($user->profile_photo_path);
+            }
+    
+            // Store the new photo
+            $path = $input['photo']->store('profile-photos', 'public');
+            $input['profile_photo_path'] = $path;
         }
-
-        if ($input['email'] !== $user->email &&
-            $user instanceof MustVerifyEmail) {
+    
+        if ($input['email'] !== $user->email && $user instanceof MustVerifyEmail) {
             $this->updateVerifiedUser($user, $input);
         } else {
             $user->forceFill([
@@ -38,15 +45,12 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
                 'email' => $input['email'],
                 'phone' => $input['phone'],
                 'address' => $input['address'],
+                'profile_photo_path' => $input['profile_photo_path'] ?? $user->profile_photo_path, // Update profile photo path if new photo is uploaded
             ])->save();
         }
     }
-
-    /**
-     * Update the given verified user's profile information.
-     *
-     * @param  array<string, string>  $input
-     */
+    
+    // Ensure this method exists if the user needs to verify their email
     protected function updateVerifiedUser(User $user, array $input): void
     {
         $user->forceFill([
@@ -54,9 +58,9 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
             'email' => $input['email'],
             'phone' => $input['phone'],
             'address' => $input['address'],
-            'email_verified_at' => null,
+            'profile_photo_path' => $input['profile_photo_path'] ?? $user->profile_photo_path, // Update profile photo path if new photo is uploaded
         ])->save();
-
+    
         $user->sendEmailVerificationNotification();
     }
 }

@@ -71,8 +71,8 @@
     <br>
     <br>
 
-                      <div style="text-align:center">              
-                 <table >
+                      <div class="text-align:center">              
+                 <table>
                 <thead>
                     <tr>
                     <th>Security Register</th>

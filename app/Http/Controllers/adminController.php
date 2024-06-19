@@ -227,7 +227,7 @@ class adminController extends Controller
 
     public function guest()
     {
-        $pcregisters=pcregister::where('description','other')->get();
+        $pcregisters=pcregister::where('description','guest')->get();
         return view('admin.guest',compact('pcregisters'));
     }
 

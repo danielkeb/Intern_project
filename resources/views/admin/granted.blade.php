@@ -56,7 +56,7 @@
 </section>
 
         <section class="content">
-            <table>
+            <table class="table table-bordered">
                 <thead>
                     
                         <th>User ID</th>

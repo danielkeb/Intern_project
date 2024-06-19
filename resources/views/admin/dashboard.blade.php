@@ -55,7 +55,7 @@
     <h1 style="color: #4287f5; font-size: 32px; text-align: center; text-transform: uppercase; letter-spacing: 2px;">User Found</h1>
 </section>
 
-        <section class="content">
+        <section class="content ml-10">
             <table>
                 <thead>
                     

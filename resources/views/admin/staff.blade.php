@@ -70,7 +70,7 @@
     <br>
 
                       <div style="text-align:center">              
-                 <table >
+                 <table>
                 <thead>
                     <tr>
                     <th>Security Register</th>

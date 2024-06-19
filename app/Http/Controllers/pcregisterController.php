@@ -176,8 +176,23 @@ class PcregisterController extends Controller
  }
     public function index()
     {
-        $pcregisters = pcregister::all();
-        return view('home.showpc', compact('pcregisters'));
+        $descriptionFilter = session('descriptionFilter');
+
+        $rowsPerPage = session('rowsPerPage', 5); // Default value if not set
+
+        // Retrieve all PCRegisters if no filter is applied
+        $query = pcregister::query();
+
+        // Apply description filter if provided
+        if ($descriptionFilter) {
+            $query->where('description', $descriptionFilter);
+        }
+
+        // Paginate the results
+        $pcregisters = $query->paginate($rowsPerPage);
+
+        return view('home.showpc', compact('pcregisters', 'rowsPerPage'));
+
     }
 
 
@@ -329,12 +344,11 @@ public function edit_pcregister($id){
         $pcregister->description = $request->description;
         $pcregister->pc_name = $request->pc_name;
         $pcregister->serial_number = $request->serial_number;
-
         if ($request->hasFile('photo')) {
-            $photoPath = $request->file('photo')->store('photos');
-        
-            $pcregister->photo = $photoPath;
-            
+            $photo = $request->file('photo');
+            $fileName = time() . '.' . $photo->getClientOriginalExtension();
+            $photo->move(public_path('data'), $fileName);
+            $pcregister->photo = 'data/' . $fileName;
         }
 
         $pcregister->save();
@@ -348,7 +362,26 @@ public function edit_pcregister($id){
  
 
  }
+ public function setRowsPerPage(Request $request)
+    {
+        $request->validate([
+            'rowsPerPage' => 'required|integer|in:5,10,20', // Define allowed values
+        ]);
 
-  
- }
+        session(['rowsPerPage' => $request->input('rowsPerPage')]);
+
+        return redirect()->back()->with('success', 'Rows per page updated successfully.');
+    }
+
+    public function filterByDescription(Request $request)
+    {
+        $request->validate([
+            'descriptionFilter' => 'nullable|in:guest,student,staff',
+        ]);
+
+        session(['descriptionFilter' => $request->input('descriptionFilter')]);
+
+        return redirect()->route('pcregisters.index')->with('success', 'Description filter applied successfully.');
+    }
+    }
 

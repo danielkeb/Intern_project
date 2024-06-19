@@ -32,7 +32,7 @@
 </ul>
 
 <h2>Users' Name, Email, and Phone for usertype 0</h2>
-<table>
+<table >
     <thead>
         <tr>
             <th>Name</th>

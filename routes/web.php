@@ -54,7 +54,7 @@ Route::middleware([
     'auth',
     'auth:sanctum',
     config('jetstream.auth_session'),
-    'throttle:100,30',
+    'throttle:300,30',
     'web',
     'verified',
     'usertype:0'
@@ -78,6 +78,10 @@ Route::middleware([
     Route::post('/delete/{id}', [PcregisterController::class, 'delete_pcregister'])->name('pcregisters.delete_pcregister');
     Route::post('edit/{id}', [PcregisterController::class, 'edit_pcregister'])->name('pcregisters.edit_pcregister');
     Route::get('edit/', [PcregisterController::class, 'update'])->name('pcregisters.update');
+    Route::post('/set-rows-per-page', [PcregisterController::class, 'setRowsPerPage'])->name('setRowsPerPage');
+    Route::get('/set-rows-per-page', [PcregisterController::class, 'setRowsPerPage'])->name('setRowsPerPage');
+    Route::get('/pcregisters', [PcregisterController::class, 'index'])->name('pcregisters.index');
+    Route::post('/pcregisters/filter', [PcregisterController::class,'filterByDescription'])->name('pcregisters.filterByDescription');
 
 
     Route::get('/download-file', [PcregisterController::class, 'download'])->name('download.file');
@@ -115,7 +119,7 @@ Route::middleware([
     'auth',
     'auth:sanctum',
     config('jetstream.auth_session'),
-    'throttle:100,30',
+    'throttle:300,30',
     'web',
     'verified',
     'usertype:2'

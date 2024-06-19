@@ -69,8 +69,8 @@
     <br>
     <br>
 
-                      <div style="text-align:center">              
-                 <table >
+    <div class="ml-auto mr-3" style="margin-left:auto; margin-right:3rem;">           
+                 <table>
                 <thead>
                     <tr>
                     <th>Security Register</th>
